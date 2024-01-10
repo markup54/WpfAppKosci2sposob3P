@@ -28,6 +28,7 @@ namespace WpfAppKosci2sposob3P
             InitializeComponent();
             rezultaty = new ObservableCollection<Kosc>();
             DataContext = this; // żeby działało bindowanie do XAML
+            LiczbaKosci = 5;
 
 
         }
@@ -35,7 +36,7 @@ namespace WpfAppKosci2sposob3P
         private void rzuc_btn_Click(object sender, RoutedEventArgs e)
         {
            if(rezultaty.Count ==0) {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < LiczbaKosci; i++)
                 {
                     rezultaty.Add(new Kosc());
                 }
@@ -53,7 +54,7 @@ namespace WpfAppKosci2sposob3P
         private void wyczysc_btn_Click(object sender, RoutedEventArgs e)
         {
             rezultaty.Clear();
-            for(int i =0;i<10;i++)
+            for(int i =0;i<LiczbaKosci;i++)
             {
                 rezultaty.Add(new Kosc());
             }
@@ -62,7 +63,9 @@ namespace WpfAppKosci2sposob3P
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Button button = (Button)sender;
+            Kosc kosc = (Kosc)button.DataContext;
+            kosc.CzyZaznaczona = !kosc.CzyZaznaczona;
         }
     }
 }
