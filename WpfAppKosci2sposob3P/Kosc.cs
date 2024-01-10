@@ -21,7 +21,18 @@ namespace WpfAppKosci2sposob3P
                 }
             } 
         }
-        public bool CzyZaznaczona { get; set; }
+        private bool _czyZaznaczona;
+        public bool CzyZaznaczona { 
+            get => _czyZaznaczona;
+            set
+            {
+                _czyZaznaczona = value;
+                if(PropertyChanged != null)
+                {
+                    PropertyChanged.Invoke(this,new PropertyChangedEventArgs(nameof(CzyZaznaczona)));
+                }
+            } 
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
     }
