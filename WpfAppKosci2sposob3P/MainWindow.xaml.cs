@@ -21,11 +21,12 @@ namespace WpfAppKosci2sposob3P
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<int> rezultaty { get; set; }
+        public ObservableCollection<Kosc> rezultaty { get; set; }
+        public int LiczbaKosci { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            rezultaty = new ObservableCollection<int>();
+            rezultaty = new ObservableCollection<Kosc>();
             DataContext = this; // żeby działało bindowanie do XAML
 
 
@@ -33,11 +34,19 @@ namespace WpfAppKosci2sposob3P
 
         private void rzuc_btn_Click(object sender, RoutedEventArgs e)
         {
-            rezultaty.Clear();
+           if(rezultaty.Count ==0) {
+                for (int i = 0; i < 10; i++)
+                {
+                    rezultaty.Add(new Kosc());
+                }
+
+            }
             Random random = new Random();
-            for(int i = 0;i<10;i++)
+            foreach (Kosc k in rezultaty)
             {
-                rezultaty.Add(random.Next(1, 7));
+                if (k.CzyZaznaczona == false)
+
+                    k.Wartosc = random.Next(1, 7);
             }
         }
 
@@ -46,8 +55,13 @@ namespace WpfAppKosci2sposob3P
             rezultaty.Clear();
             for(int i =0;i<10;i++)
             {
-                rezultaty.Add(0);
+                rezultaty.Add(new Kosc());
             }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
